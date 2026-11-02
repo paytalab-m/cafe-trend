@@ -233,14 +233,47 @@ footer b{color:var(--ink2)}
  .lead .v{font-size:26px}
 }
 
-/* 지난 판 보기 */
-.days{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;margin:14px 0 2px;
- font-size:12px;color:var(--mut)}
-.days a{color:var(--ink2);text-decoration:none;border:1px solid var(--hair);
- border-radius:999px;padding:3px 9px;background:var(--surface);white-space:nowrap}
-.days a:hover{border-color:var(--ring);color:var(--accent)}
-.days .k{color:var(--mut)}
-.days .back a{border-color:var(--ring)}
+/* 지난 날짜 보기 — day_picker() 가 만든다.
+   자주 하는 건 하루 앞뒤로 옮기는 것이라 이동 단추를 앞에, 달력은 접어 둔다.
+   칸 크기는 손가락 기준(모바일 44px, Apple HIG)으로 잡는다 */
+.days{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 2px;
+ font-size:12px}
+.days .go,.cal>summary{display:inline-flex;align-items:center;gap:6px;
+ min-height:32px;padding:0 13px;border:1px solid var(--ring);border-radius:999px;
+ background:var(--surface);color:var(--ink2);text-decoration:none;cursor:pointer;
+ font-size:12px;line-height:1}
+.days .go:hover,.cal>summary:hover{border-color:var(--accent);color:var(--accent)}
+.days .go:focus-visible,.cal>summary:focus-visible,.mon .grid a:focus-visible{
+ outline:2px solid var(--accent);outline-offset:2px}
+.days .ar{color:var(--mut);font-size:13px}
+.days .go:hover .ar{color:var(--accent)}
+.days .now{color:var(--mut);padding:0 2px}
+
+.cal{display:inline-block;margin:0}
+.cal>summary{list-style:none}
+.cal>summary::-webkit-details-marker{display:none}
+.cal>summary::after{content:"▾";color:var(--mut);font-size:10px}
+.cal[open]>summary{color:var(--ink);border-color:var(--ink2)}
+.cals{display:flex;flex-wrap:wrap;gap:20px;margin:10px 0 2px;padding:14px 16px;
+ background:var(--surface);border:1px solid var(--ring);border-radius:12px}
+.mon{min-width:224px}
+.mon .mh{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:8px}
+.mon .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;
+ font-variant-numeric:tabular-nums}
+.mon .grid i,.mon .grid a,.mon .grid span{display:flex;align-items:center;
+ justify-content:center;min-height:32px;border-radius:7px;font-size:12px;
+ font-style:normal}
+.mon .grid i{color:var(--mut);font-size:10.5px;min-height:20px}
+.mon .grid a{color:var(--ink);text-decoration:none;background:var(--plane);
+ border:1px solid var(--hair);font-weight:650}
+.mon .grid a:hover{border-color:var(--accent);color:var(--accent)}
+.mon .grid .off{color:var(--mut);opacity:.35}
+.mon .grid .now{color:var(--up);font-weight:700;border:1px solid var(--up)}
+@media(max-width:560px){
+ .cals{padding:12px 10px}
+ .mon{min-width:0;flex:1 1 100%}
+ .mon .grid a,.mon .grid span{min-height:44px}   /* 손가락 기준 */
+}
 </style>
 <div class="page">
 <h1>대한민국 카페·음료·디저트 트렌드</h1>
